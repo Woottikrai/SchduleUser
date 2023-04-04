@@ -7,7 +7,7 @@ export async function Get<T>() {
   return await axios.get<Array<T>>(`${BASE_URL}`);
 }
 
-export async function Post<T>(params?: IUser) {
+export async function Post<T>(params?: T) {
   if (params) {
     return await axios.post<T>(`${BASE_URL}/create`, params);
   }
