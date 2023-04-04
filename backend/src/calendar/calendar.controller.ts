@@ -17,22 +17,22 @@ import { ApiTags } from '@nestjs/swagger';
 export class CalendarController {
   constructor(private readonly calendarService: CalendarService) {}
 
-  @Post()
+  @Post('post')
   create(@Body() createCalendarDto: CreateCalendarDto) {
     return this.calendarService.create(createCalendarDto);
   }
 
-  @Get()
+  @Get('get')
   findAll() {
     return this.calendarService.findAll();
   }
 
-  @Get(':id')
+  @Get('get/:id')
   findOne(@Param('id') id: string) {
     return this.calendarService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('patch/:id')
   update(
     @Param('id') id: string,
     @Body() updateCalendarDto: UpdateCalendarDto,
@@ -40,7 +40,7 @@ export class CalendarController {
     return this.calendarService.update(+id, updateCalendarDto);
   }
 
-  @Delete(':id')
+  @Delete('delete/:id')
   remove(@Param('id') id: string) {
     return this.calendarService.remove(+id);
   }
