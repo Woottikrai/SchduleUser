@@ -11,17 +11,5 @@ export class Calendar {
   id: number;
 
   @Column()
-  daymon: string[];
-
-  @Column()
-  daytue: string[];
-
-  @Column()
-  daywed: string[];
-
-  @Column()
-  daythu: string[];
-
-  @Column()
-  dayfri: string[];
+  date: Date;
 }
