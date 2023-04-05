@@ -17,4 +17,7 @@ export class UpdateUserDto {
 
   @ApiProperty()
   tel?: string;
+
+  @ApiProperty()
+  position?: string;
 }
