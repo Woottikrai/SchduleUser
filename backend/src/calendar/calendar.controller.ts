@@ -22,9 +22,9 @@ export class CalendarController {
     return this.calendarService.create(createCalendarDto);
   }
 
-  @Get('random')
-  random() {
-    return this.calendarService.random();
+  @Get('create')
+  date() {
+    return this.calendarService.createdate();
   }
 
   @Get('get')
