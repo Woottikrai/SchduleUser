@@ -4,13 +4,62 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
-
+import * as dayjs from 'dayjs';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {}
+
+  async random() {
+    let data = [];
+    let daymon = [];
+    let daytue = [];
+    let daywed = [];
+    let daythu = [];
+    let dayfri = [];
+    let index = 0;
+    const dateNow = new Date();
+    const checkDay = dayjs(dateNow).format('ddd');
+    const users = await this.findUserAll();
+    for (const u of users) {
+      const b = dayjs(dateNow).add(index, 'day').format('ddd').toString();
+
+      if (daymon.length <= 2 && checkDay === ' Mon') {
+        const randomElement = users[Math.floor(Math.random() * users.length)];
+        daymon.push(randomElement, dateNow);
+        index++;
+      } else if (daythu.length <= 2 && b === 'Tue') {
+        const randomElement = users[Math.floor(Math.random() * users.length)];
+        daytue.push(randomElement, dateNow);
+        index++;
+      } else if (daywed.length <= 2 && b === 'Wed') {
+        const randomElement = users[Math.floor(Math.random() * users.length)];
+        daywed.push(randomElement, dateNow);
+        index++;
+      } else if (daythu.length <= 2 && b === 'Thu') {
+        const randomElement = users[Math.floor(Math.random() * users.length)];
+        daythu.push(randomElement, dateNow);
+        index++;
+      } else if (dayfri.length <= 2 && b === 'Fri') {
+        const randomElement = users[Math.floor(Math.random() * users.length)];
+        dayfri.push(randomElement, dateNow);
+        index = 0;
+      }
+    }
+
+    console.log(users);
+    data.push({
+      daymon: daymon,
+      daytue: daytue,
+      daywed: daywed,
+      daythu: daythu,
+      dayfri: dayfri,
+    });
+    // console.log(day);
+    return data;
+  }
 
   async create(body: CreateUserDto): Promise<User> {
     try {

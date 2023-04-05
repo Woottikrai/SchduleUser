@@ -7,7 +7,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
 import { CalendauserModule } from './calendauser/calendauser.module';
-
+import { Calendauser } from './calendauser/entities/calendauser.entity';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -17,7 +17,7 @@ import { CalendauserModule } from './calendauser/calendauser.module';
       username: 'postgres',
       password: '1234',
       database: 'project',
-      entities: [User, Calendar],
+      entities: [User, Calendar, Calendauser],
       synchronize: true,
     }),
     UserModule,

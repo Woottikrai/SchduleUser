@@ -1,8 +1,18 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CalendauserService } from './calendauser.service';
 import { CreateCalendauserDto } from './dto/create-calendauser.dto';
 import { UpdateCalendauserDto } from './dto/update-calendauser.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('calendaruser')
 @Controller('calendauser')
 export class CalendauserController {
   constructor(private readonly calendauserService: CalendauserService) {}
@@ -23,7 +33,10 @@ export class CalendauserController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCalendauserDto: UpdateCalendauserDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCalendauserDto: UpdateCalendauserDto,
+  ) {
     return this.calendauserService.update(+id, updateCalendauserDto);
   }
 
