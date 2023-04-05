@@ -1,194 +1,124 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import { useNavigate } from "react-router-dom";
-import {
-  AuditOutlined,
-  HomeFilled,
-  HomeOutlined,
-  HomeTwoTone,
-  UserOutlined,
-} from "@ant-design/icons";
-import { pages } from "../../data/pages";
+import MenuIcon from "@mui/icons-material/Menu";
+import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
+import HideOnScroll from "../../utils/hideOnScroll";
+import { GithubFilled } from "@ant-design/icons";
+import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
+import { jsx } from "@emotion/react";
+import { CSSProperties } from "@emotion/serialize";
 
-const drawerWidth = 260;
-
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })<{
-  open?: boolean;
-}>(({ theme, open }) => ({
-  flexGrow: 1,
-  padding: theme.spacing(0),
-  transition: theme.transitions.create("margin", {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  marginLeft: `-${drawerWidth}px`,
-  ...(open && {
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-    marginLeft: 0,
-  }),
-}));
-
-interface AppBarProps extends MuiAppBarProps {
-  open?: boolean;
+interface Props {
+  window?: () => Window;
 }
 
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})<AppBarProps>(({ theme, open }) => ({
-  transition: theme.transitions.create(["margin", "width"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    width: `calc(100% - ${drawerWidth}px)`,
-    marginLeft: `${drawerWidth}px`,
-    transition: theme.transitions.create(["margin", "width"], {
-      easing: theme.transitions.easing.easeOut,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+const useStyle: CSSProperties | any = {
+  fontSize: "1.5rem",
+};
 
-const DrawerHeader = styled("div")(({ theme }) => ({
-  display: "flex",
-  alignItems: "center",
-  padding: theme.spacing(0, 1),
-  // necessary for content to be below app bar
-  ...theme.mixins.toolbar,
-  justifyContent: "flex-end",
-}));
+const drawerWidth = 240;
+const navItems = ["Home", "User", "Booking", <GithubFilled style={useStyle} />];
 
-export default function Navbar() {
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate();
-  const handleDrawerOpen = () => {
-    setOpen(true);
+export default function DrawerAppBar(props: Props) {
+  const { window } = props;
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  const handleDrawerToggle = () => {
+    setMobileOpen((prevState) => !prevState);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
+      <Typography variant="h6" sx={{ my: 0 }}>
+        MUI
+      </Typography>
+      <Divider />
+      <List>
+        {navItems.map((item: any) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton
+              sx={{ textAlign: "center" }}
+              onClick={() => console.log("page")}
+            >
+              <ListItemText primary={item} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
-  const handlePage = (page: any) => {
-    switch (page) {
-      case "Home":
-        navigate("/");
-        setOpen(false);
-
-        break;
-      case "User":
-        navigate("/UserList");
-        setOpen(false);
-
-        break;
-      case "Booking":
-        navigate("/Booking");
-        setOpen(false);
-
-        break;
-      default:
-        alert("not found page");
-        break;
-    }
-  };
-
-  const handleIcon = (idx: number): React.ReactNode => {
-    switch (idx) {
-      case 0:
-        return <HomeOutlined />;
-
-      case 1:
-        return <UserOutlined />;
-
-      case 2:
-        return <AuditOutlined />;
-
-      default:
-        break;
-    }
-  };
+  const container =
+    window !== undefined ? () => window().document.body : undefined;
 
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            edge="start"
-            sx={{ mr: 2, ...(open && { display: "none" }) }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" noWrap component="div"></Typography>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
-            width: drawerWidth,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === "ltr" ? (
-              <ChevronLeftIcon />
-            ) : (
-              <ChevronRightIcon />
-            )}
-          </IconButton>
-        </DrawerHeader>
-        <Divider />
-        <List className="uppercase font-bold">
-          {pages.map((text, index) => (
-            <ListItem
-              key={text}
-              disablePadding
-              className="hover:bg-blue-500 transition-all delay-75 hover:text-white"
+      <HideOnScroll {...props}>
+        <AppBar component="nav">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ mr: 2, display: { sm: "none" } }}
             >
-              <ListItemButton className="">
-                <ListItemIcon>{handleIcon(index)}</ListItemIcon>
-                <ListItemText primary={text} onClick={() => handlePage(text)} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-      </Main>
+              <MenuIcon />
+            </IconButton>
+            <Typography
+              variant="h6"
+              component="div"
+              className="capitalize font-semibold tracking-wide"
+              sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
+            >
+              Booking System
+            </Typography>
+            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+              {navItems.map((item: any) => (
+                <Button key={item} sx={{ color: "#fff" }}>
+                  {item}
+                </Button>
+              ))}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
+
+      <Box component="nav">
+        <Drawer
+          container={container}
+          variant="temporary"
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          ModalProps={{
+            keepMounted: true, // Better open performance on mobile.
+          }}
+          sx={{
+            display: { xs: "block", sm: "none" },
+            "& .MuiDrawer-paper": {
+              boxSizing: "border-box",
+              width: drawerWidth,
+            },
+          }}
+        >
+          {drawer}
+        </Drawer>
+      </Box>
+      <Box component="main" sx={{ p: 0 }}>
+        <Toolbar />
+      </Box>
     </Box>
   );
 }

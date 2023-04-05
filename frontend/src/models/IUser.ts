@@ -1,8 +1,15 @@
-export default interface IUser {
-  id: number;
-  name: string;
+export interface IUser {
+  id?: number;
+  key?: string;
+  name?: string;
+  fullname: string;
   email: string;
-  password: string;
-  idline: string;
+  position: string;
+  image?: string;
   tel?: string;
+  columnName: IUserName;
+}
+
+export interface IUserName extends IUser {
+  data: Pick<IUser, "fullname" | "email" | "image">;
 }

@@ -2,8 +2,13 @@
     font-family: 'Noto Serif Thai', serif;
 }
 
-.card {
-  border: 1px solid #e0e3e6
+.card-top {
+  border: 1px solid #e0e3e6;
+  /* width: 350px */
+}
+
+.card-bottom {
+  border: 1px solid #e0e3e6;
 }
 
 

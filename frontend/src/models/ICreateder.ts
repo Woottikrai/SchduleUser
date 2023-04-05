@@ -3,4 +3,5 @@ export default interface ICreateder {
   name: string;
   description: string;
   position: string;
+  path: string;
 }
