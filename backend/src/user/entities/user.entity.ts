@@ -6,7 +6,6 @@ import {
   OneToMany,
   JoinTable,
 } from 'typeorm';
-import { Calendauser } from 'src/calendauser/entities/calendauser.entity';
 
 @Entity('user')
 export class User {
@@ -31,6 +30,6 @@ export class User {
   @Column()
   position: string;
 
-  @OneToMany(() => Calendauser, (calendaruser) => calendaruser.user)
-  calendaruser: Calendauser[];
+  @Column()
+  picture: string;
 }
