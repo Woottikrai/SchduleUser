@@ -23,11 +23,6 @@ export class UserController {
   }
 
   @Get('get')
-  random() {
-    return this.userService.random();
-  }
-
-  @Get('get')
   findAll() {
     return this.userService.findUserAll();
   }

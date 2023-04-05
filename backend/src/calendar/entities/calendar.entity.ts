@@ -5,15 +5,23 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Calendauser } from 'src/calendauser/entities/calendauser.entity';
 @Entity('calendar')
 export class Calendar {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  date: Date;
+  daymon: string[];
 
-  @OneToMany(() => Calendauser, (calendaruser) => calendaruser.calendar)
-  calendaruser: Calendauser[];
+  @Column()
+  daytue: string[];
+
+  @Column()
+  daywed: string[];
+
+  @Column()
+  daythu: string[];
+
+  @Column()
+  dayfri: string[];
 }
