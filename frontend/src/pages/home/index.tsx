@@ -5,7 +5,7 @@ import "./home.css";
 import GridLayout from "../../components/layouts/gridLayout";
 import ICreateder from "../../models/ICreateder";
 import * as DataCreateder from "../../data/createder";
-import Card from "../../components/card";
+import Card from "../../components/card/cardDefault";
 import { Link } from "react-router-dom";
 export default function Home() {
   const handleToLocation = () => {

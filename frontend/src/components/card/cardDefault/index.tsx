@@ -1,7 +1,7 @@
 import "./card.css";
 type CardProps = {
   className?: string;
-  id: string | number;
+  id?: string | number;
   title: string;
   description: string;
   position: string;
