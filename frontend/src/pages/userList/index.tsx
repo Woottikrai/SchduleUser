@@ -1,6 +1,5 @@
 import React from "react";
 import { Button, Input } from "antd";
-import Table from "../../components/tableComponent";
 import "./userList.css";
 import { UserDeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +10,8 @@ import * as ApiUser from "../../service/API/UserApi";
 import { IUser, IUserTable } from "../../models/IUser";
 import { PlusOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 
-import SearchUser from "../../components/input/searchUser";
 import CardUserList from "../../components/card/cardUserList";
+import TableComponent from "../../components/tablecomponent";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser>);
@@ -127,7 +126,7 @@ export default function UserList() {
         />
       </div>
 
-      <Table
+      <TableComponent
         className=" mx-auto text-center shadow-md my-10"
         columns={[
           {
