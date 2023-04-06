@@ -1,15 +1,15 @@
 import React from "react";
-import RowTable from "../../components/rowTable";
-import Table from "../../components/tablecomponent";
+import RowTable from "../../components/rowTableComponent";
+import Table from "../../components/tableComponent";
+import "./userList.css";
 import { columns } from "../../data/columns";
-import { users } from "../../data/users";
+
 import * as User from "../../models/IUser";
+import { dataSource } from "../../data/users";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<User.IUser>);
-  React.useEffect(() => {
-    setUsers(users);
-  }, []);
+
   return (
     <div className="">
       <div className="flex justify-between">
@@ -23,7 +23,11 @@ export default function UserList() {
       <div></div>
       {/* SearchUser */}
 
-      <Table className="" columns={columns} dataSource={users} />
+      <Table
+        className="max-w-4xl mx-auto text-center shadow-md"
+        columns={columns}
+        dataSource={dataSource}
+      />
     </div>
   );
 }

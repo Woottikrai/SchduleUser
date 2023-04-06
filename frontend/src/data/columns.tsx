@@ -1,18 +1,24 @@
 import type { ColumnsType } from "antd/es/table";
-import * as User from "../models/IUser";
+import { Row, Col, Avatar } from "antd";
+import { IUser } from "../models/IUser";
 
 export const columns: ColumnsType<any> = [
   {
     title: "Name",
     dataIndex: "columnName",
     key: "columnName",
-    render: (_, { columnName }) => {
+    align: "center",
+    render: (_, rc, index) => {
       return (
-        <>
-          {columnName.map((it: User.IUserName) => {
-            return <div>{}</div>;
-          })}
-        </>
+        <Row key={rc.index}>
+          <Col span={""}>
+            <Avatar src={rc.columnName.image} />
+          </Col>
+          <Col span={""}>
+            <p>{rc.columnName.name}</p>
+            <p>{rc.columnName.email}</p>
+          </Col>
+        </Row>
       );
     },
   },
@@ -20,10 +26,14 @@ export const columns: ColumnsType<any> = [
     title: "Position",
     dataIndex: "position",
     key: "position",
+    align: "center",
   },
+  { title: "Status", dataIndex: "status", key: "status", align: "center" },
   {
-    title: "Tel",
-    dataIndex: "tel",
-    key: "tel",
+    title: "Action",
+    dataIndex: "action",
+    key: "action",
+    align: "center",
   },
+  {},
 ];

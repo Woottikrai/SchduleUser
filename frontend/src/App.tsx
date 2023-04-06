@@ -10,12 +10,14 @@ import ErrorPage from "./pages/errorPage";
 import Date from "./pages/signin";
 
 import TestPage from "./pages/testPage";
+import CreateUser from "./pages/createUser";
 
 function App() {
   const routes: Array<IRoute> = [
     { path: "/", element: <Home /> },
     { path: "/Signin", element: <Signin /> },
     { path: "/UserList", element: <UserList /> },
+    { path: "/CreateUser", element: <CreateUser /> },
     { path: "/Booking", element: <Booking /> },
     { path: "/Test", element: <TestPage /> },
     { path: "/*", element: <ErrorPage /> },

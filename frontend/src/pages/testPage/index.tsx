@@ -1,13 +1,15 @@
 import React from "react";
-import { Space, Table, Tag } from "antd";
+import { Space, Table, Tag, Row, Col, Avatar } from "antd";
 import type { ColumnsType } from "antd/es/table";
+import { users } from "../../data/users";
 
-interface DataType {
-  key: string;
+export interface DataType {
+  key?: string;
   name: string;
   age: number;
   address: string;
-  tags: string[];
+  tags?: Array<Pick<DataType, "name" | "address" | "age">>;
+  // [{name: '', address: '', age: ''}]
 }
 
 const columns: ColumnsType<DataType> = [
@@ -31,21 +33,25 @@ const columns: ColumnsType<DataType> = [
     title: "Tags",
     key: "tags",
     dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color = tag.length > 5 ? "geekblue" : "green";
-          if (tag === "loser") {
-            color = "volcano";
-          }
-          return (
-            <Tag color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    render: (_, rc) => {
+      // <>
+      //   {rc.tags?.map((it) => {
+      //     return <div></div>;
+      //   })}
+      // </>
+      const name = rc.name;
+      return (
+        <Row>
+          <Col span={""}>
+            <Avatar src={""} />
+          </Col>
+          <Col span={""}>
+            <p>{name}</p>
+            <p>dfeadfe</p>
+          </Col>
+        </Row>
+      );
+    },
   },
   {
     title: "Action",
@@ -65,7 +71,13 @@ const data: DataType[] = [
     name: "John Brown",
     age: 32,
     address: "New York No. 1 Lake Park",
-    tags: ["nice", "developer"],
+    tags: [
+      {
+        name: "dfe",
+        address: "",
+        age: 0,
+      },
+    ],
   },
   {
     key: "2",
@@ -83,6 +95,6 @@ const data: DataType[] = [
   },
 ];
 
-const TestPage: React.FC = () => <Table columns={columns} dataSource={data} />;
+const App: React.FC = () => <Table columns={columns} dataSource={users} />;
 
-export default TestPage;
+export default App;

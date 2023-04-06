@@ -1,40 +1,41 @@
 import * as User from "../models/IUser";
+import { DataType } from "../pages/testPage";
 
-export const users: Array<User.IUser> = [
+export const users: Array<DataType> = [
   {
-    id: 1,
-    fullname: "Thanawat Launakorn",
-    email: "everlastbw@hotmail.com",
+    name: "Thanawat Launakorn",
+    address: "dfe",
+    age: 22,
+  },
+
+  {
+    name: "Jame John",
+    address: "dfe",
+    age: 22,
+  },
+];
+
+export const dataSource: any = [
+  {
+    key: "1",
     position: "frontend developer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
-    tel: "2134",
+    status: "online",
+    columnName: {
+      name: "Thanawat Launakorn",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
+      email: "@testgmail.co1m",
+    },
   },
   {
-    id: 1,
-    fullname: "Thanawat Launakorn",
-    email: "everlastbw@hotmail.com",
-    position: "frontend developer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
-    tel: "2134",
-  },
-  {
-    id: 1,
-    fullname: "Thanawat Launakorn",
-    email: "everlastbw@hotmail.com",
-    position: "frontend developer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
-    tel: "2134",
-  },
-  {
-    id: 1,
-    fullname: "Thanawat Launakorn",
-    email: "everlastbw@hotmail.com",
-    position: "frontend developer",
-    image:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
-    tel: "2134",
+    key: "2",
+    position: "backend developer",
+    status: "offline",
+    columnName: {
+      name: "Thanawat Launakorn",
+      image:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS-RWHO_ItDM66Uol3WboX1tlgVGJjxRfM_uA&usqp=CAU",
+      email: "@testgmail.com",
+    },
   },
 ];
