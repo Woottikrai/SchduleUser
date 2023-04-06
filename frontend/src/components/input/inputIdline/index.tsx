@@ -1,16 +1,16 @@
-import React from "react";
 import { Input } from "antd";
+import React from "react";
 type InputTitleProps = {
+  id: string;
   type: string;
   className?: string;
   placeholder?: string;
   name: string;
   value?: string;
-  id: string;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   autoComplete?: string;
 };
-export default function InputFirstname({
+export default function InputIdLine({
   type,
   className,
   placeholder,
@@ -20,7 +20,7 @@ export default function InputFirstname({
   autoComplete,
 }: InputTitleProps) {
   return (
-    <div className="input-firstname">
+    <div className="input-password">
       <Input
         {...{
           type,

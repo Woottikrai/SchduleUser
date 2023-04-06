@@ -1,5 +1,7 @@
+import { Input } from "antd";
 import React from "react";
 type InputTitleProps = {
+  id: string;
   type: string;
   className?: string;
   placeholder?: string;
@@ -19,7 +21,7 @@ export default function InputEmail({
 }: InputTitleProps) {
   return (
     <div className="input-email">
-      <input
+      <Input
         {...{
           type,
           className,

@@ -1,5 +1,7 @@
+import { Input } from "antd";
 import React from "react";
 type InputTitleProps = {
+  id: string;
   type: string;
   className?: string;
   placeholder?: string;
@@ -9,6 +11,7 @@ type InputTitleProps = {
   autoComplete?: string;
 };
 export default function InputTel({
+  id,
   type,
   className,
   placeholder,
@@ -19,7 +22,7 @@ export default function InputTel({
 }: InputTitleProps) {
   return (
     <div className="input-tel">
-      <input
+      <Input
         {...{
           type,
           className,

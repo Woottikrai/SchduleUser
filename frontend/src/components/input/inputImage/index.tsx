@@ -1,9 +1,12 @@
 import React from "react";
+import { UserAddOutlined, UserOutlined } from "@ant-design/icons";
+import "./inputImage.css";
 type InputImageProps = {
+  name: string;
   preview?: string;
   onClickImage: any;
   onClickButton: React.FormEvent | any;
-  icon?: IconDefinition;
+  id: string;
   fileInputRef: HTMLInputElement | any;
   type: string;
   accept: string;
@@ -16,7 +19,7 @@ export default function InputImage({
   preview,
   onClickImage,
   onClickButton,
-  icon,
+
   fileInputRef,
   type,
   accept,
@@ -35,10 +38,13 @@ export default function InputImage({
           onClick={onClickImage}
         />
       ) : (
-        <button
-          className="buttonImage bg-gray-200"
-          onClick={onClickButton}
-        ></button>
+        <button className="buttonImage bg-gray-100" onClick={onClickButton}>
+          <UserOutlined
+            style={{
+              fontSize: "5rem",
+            }}
+          />
+        </button>
       )}
       <input
         type={type}
