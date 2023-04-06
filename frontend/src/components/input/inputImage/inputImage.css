@@ -1,0 +1,25 @@
+.buttonImage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border: none;
+
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.Image {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    cursor: pointer;
+
+  
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
