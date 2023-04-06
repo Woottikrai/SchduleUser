@@ -1,9 +1,10 @@
 import React from "react";
-import Form from "../../components/form/createUserForm";
+
 import * as ApiUser from "../../service/API/UserApi";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../models/IUser";
 import { delay, wait } from "../../utils/wait";
+import FormCreateUser from "../../components/form/createUserForm";
 export default function CreateUser() {
   const fileInputRef = React.useRef<HTMLInputElement | any>();
   const [loadingButton, setLoadingButton] = React.useState(false as boolean);
@@ -43,7 +44,11 @@ export default function CreateUser() {
       }, 3000);
 
       inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
-      // const data = await ApiUser.Post(inputUser);
+      console.log(inputUser);
+
+      const data = await ApiUser.Post(inputUser);
+      console.log(data);
+
       // console.log(data);
       // console.log(inputUser);
 
@@ -97,7 +102,7 @@ export default function CreateUser() {
 
   return (
     <div className="container max-w-5xl shadow-xl rounded-xl mx-auto mt-20">
-      <Form
+      <FormCreateUser
         fileInputRef={fileInputRef}
         preview={preview}
         onChangeImage={handleChangeImage}

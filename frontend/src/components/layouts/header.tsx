@@ -18,7 +18,7 @@ import { GithubFilled } from "@ant-design/icons";
 import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 import { jsx } from "@emotion/react";
 import { CSSProperties } from "@emotion/serialize";
-
+import { useNavigate } from "react-router-dom";
 interface Props {
   window?: () => Window;
 }
@@ -33,9 +33,33 @@ const navItems = ["Home", "User", "Booking", <GithubFilled style={useStyle} />];
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const navigate = useNavigate();
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
+  };
+
+  const handlePage = (idx: number) => {
+    switch (idx) {
+      case 0:
+        navigate("/");
+        break;
+
+      case 1:
+        navigate("/userList");
+        break;
+
+      case 2:
+        navigate("/booking");
+        break;
+
+      case 3:
+        navigate("https://github.com/Woottikrai/SchduleUser");
+        break;
+
+      default:
+        alert("Not found page");
+        break;
+    }
   };
 
   const drawer = (
@@ -44,18 +68,7 @@ export default function DrawerAppBar(props: Props) {
         MUI
       </Typography>
       <Divider />
-      <List>
-        {navItems.map((item: any) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton
-              sx={{ textAlign: "center" }}
-              onClick={() => console.log("page")}
-            >
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+      <List></List>
     </Box>
   );
 
@@ -86,8 +99,12 @@ export default function DrawerAppBar(props: Props) {
               Booking System
             </Typography>
             <Box sx={{ display: { xs: "none", sm: "block" } }}>
-              {navItems.map((item: any) => (
-                <Button key={item} sx={{ color: "#fff" }}>
+              {navItems.map((item: any, index) => (
+                <Button
+                  key={item}
+                  sx={{ color: "#fff" }}
+                  onClick={() => handlePage(index)}
+                >
                   {item}
                 </Button>
               ))}

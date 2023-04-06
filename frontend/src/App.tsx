@@ -11,6 +11,7 @@ import Date from "./pages/signin";
 
 import TestPage from "./pages/testPage";
 import CreateUser from "./pages/createUser";
+import EditUser from "./pages/editUser";
 
 function App() {
   const routes: Array<IRoute> = [
@@ -18,6 +19,7 @@ function App() {
     { path: "/Signin", element: <Signin /> },
     { path: "/UserList", element: <UserList /> },
     { path: "/CreateUser", element: <CreateUser /> },
+    { path: "/userList/:id/EditUser", element: <EditUser /> },
     { path: "/Booking", element: <Booking /> },
     { path: "/Test", element: <TestPage /> },
     { path: "/*", element: <ErrorPage /> },

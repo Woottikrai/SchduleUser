@@ -1,5 +1,140 @@
 import React from "react";
+import * as ApiUser from "../../service/API/UserApi";
+import { useNavigate } from "react-router-dom";
+import { IUser } from "../../models/IUser";
+import { delay, wait } from "../../utils/wait";
+import { useParams } from "react-router-dom";
 
+import FormEditUser from "../../components/form/editUserForm";
 export default function EditUser() {
-  return <div>EditUser</div>;
+  const fileInputRef = React.useRef<HTMLInputElement | any>();
+  const [loadingButton, setLoadingButton] = React.useState(false as boolean);
+  const [inputUser, setInputUser] = React.useState(
+    {} as Omit<IUser, "firstname" | "lastname">
+  );
+  const [preview, setPreview] = React.useState<string | any>();
+  const [inputImage, setInputImage] = React.useState<File>();
+  const [error, setError] = React.useState("");
+  const { id } = useParams();
+  const idNumber = Number(id);
+  const navigate = useNavigate();
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setInputUser((prevItem: any) => {
+      return { ...prevItem, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleButtonImage = (e: React.FormEvent) => {
+    e.preventDefault();
+    fileInputRef.current.click();
+  };
+
+  const handleChangeImage = (e: React.ChangeEvent<HTMLInputElement> | any) => {
+    const file = e.target.files[0];
+    file && setInputImage(file);
+  };
+
+  const handleClickImage = () => {
+    setPreview(null);
+  };
+
+  const getValueUser = async (id?: string | number) => {
+    const data = await ApiUser.GetId(id);
+
+    if (data) {
+      setInputUser({
+        email: data.data.email,
+        // firstname: data.data.name?.split(" ")[0],
+        // lastname: data.data.name?.split(" ")[1],
+        idline: data.data.idline,
+        image: data.data.image,
+        position: data.data.position,
+        tel: data.data.tel,
+        password: data.data.password,
+      });
+    }
+  };
+
+  const handleClick = async () => {
+    try {
+      setLoadingButton(true);
+      setTimeout(() => {
+        setLoadingButton(false);
+      }, 3000);
+
+      // inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
+      inputUser.name = "thanawat ";
+      console.log(inputUser);
+
+      const data = await ApiUser.Update(Number(id), inputUser);
+      // console.log(data);
+      // console.log(inputUser);
+
+      setError("");
+    } catch (error) {
+      alert(error);
+      console.error("❌ Error", error);
+      setError("Something went wrong");
+    } finally {
+      setTimeout(() => {
+        navigate("/userList");
+      }, 3000);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
+
+  React.useEffect(() => {
+    getValueUser(id);
+    if (inputImage) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(inputImage);
+      reader.onload = () => {
+        inputUser.image = reader.result;
+      };
+    } else {
+      setPreview(null);
+    }
+  }, [inputImage]);
+
+  return (
+    <div className="container max-w-5xl shadow-xl rounded-xl mx-auto mt-20">
+      <FormEditUser
+        fileInputRef={fileInputRef}
+        preview={preview}
+        onChangeImage={handleChangeImage}
+        onChangeInputEmail={handleChange}
+        onChangeInputFirstname={handleChange}
+        onChangeInputLastname={handleChange}
+        onChangeInputTel={handleChange}
+        onChangeSelectPosition={handleChange}
+        onClickButton={handleClick}
+        onClickButtonImage={handleButtonImage}
+        onClickImage={handleClickImage}
+        onChangeInputConfirmPassword={() => {}}
+        onChangeInputIdline={handleChange}
+        onChangeInputPassword={handleChange}
+        onSubmit={handleSubmit}
+        valueSelectPosition={inputUser.position}
+        valueInputEmail={inputUser.email}
+        valueInputFirstname={""}
+        valueInputImage={""}
+        valueInputLastname={""}
+        valueInputeTel={inputUser.tel}
+        valueInputConfirmPassword={inputUser.confirmpassword}
+        valueInputIdline={inputUser.idline}
+        valueInputPassword={inputUser.password}
+        loading={loadingButton}
+        className="flex"
+      />
+    </div>
+  );
 }

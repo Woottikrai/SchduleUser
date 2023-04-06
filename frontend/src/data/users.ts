@@ -19,7 +19,7 @@ export const dataSource: any = [
   {
     key: "1",
     position: "frontend developer",
-    status: "online",
+
     columnName: {
       name: "Thanawat Launakorn",
       image:
@@ -30,7 +30,7 @@ export const dataSource: any = [
   {
     key: "2",
     position: "backend developer",
-    status: "offline",
+
     columnName: {
       name: "Thanawat Launakorn",
       image:

@@ -10,7 +10,6 @@ import InputPassword from "../../input/inputPassword";
 import InputTel from "../../input/inputTel";
 import SelectPosition from "../../input/selectPosition";
 import LabelItem from "../../label";
-
 type FormProps = {
   className?: string;
   onSubmit: React.FormEventHandler<HTMLFormElement>;
@@ -40,7 +39,7 @@ type FormProps = {
   valueInputIdline: string;
   loading: any;
 };
-export default function FormCreateUser({
+export default function FormEditUser({
   className,
   onSubmit,
   fileInputRef,
@@ -247,12 +246,6 @@ export default function FormCreateUser({
         </div>
 
         <div className="flex justify-between mt-12">
-          <ButtonCPN
-            onClick={onClickReset}
-            className="uppercase"
-            value="reset"
-            size="large"
-          />
           <ButtonCPN
             onClick={onClickButton}
             className="uppercase"
