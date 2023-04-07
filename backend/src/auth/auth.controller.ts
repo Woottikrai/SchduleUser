@@ -38,11 +38,11 @@ export class AuthController {
     }
   }
 
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  async getProfile(@Request() req) {
-    const user = await this.authService.findAll();
+  // @UseGuards(JwtAuthGuard)
+  // @Get()
+  // async getProfile(@Request() req) {
+  //   const user = await this.authService.findAll();
 
-    return user;
-  }
+  //   return user;
+  // }
 }

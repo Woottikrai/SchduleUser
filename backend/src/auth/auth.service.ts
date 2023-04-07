@@ -23,10 +23,13 @@ export class AuthService {
         email: email,
       },
     });
+    // if (user && (await compareSync(password, user.password))) {
+    //   return user;
+    // }
 
-    if (user && (await compareSync(password, user.password))) {
-      return user;
-    }
+   if( user.password === password){
+    return user;
+   }
 
     return null;
   }
