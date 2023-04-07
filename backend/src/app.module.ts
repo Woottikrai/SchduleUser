@@ -9,16 +9,17 @@ import { Calendar } from './calendar/entities/calendar.entity';
 import { NotiLineModule } from './noti-line/noti-line.module';
 import { ScheduleModule } from './schedule/schedule.module';
 import { Schedule } from './schedule/entities/schedule.entity';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: '1234',
-      database: 'project',
+      password: '123',
+      database: 'schedule',
       entities: [User, Calendar, Schedule],
       synchronize: true,
     }),

@@ -15,7 +15,7 @@ export default function GridLayout({
   className,
   items,
   renderItem,
-}: GridLayoutProps<ICreateder>) {
+}: GridLayoutProps<any>) {
   return (
     <div className={`${className}`}>
       {items?.map((item, idx, array) => {

@@ -4,10 +4,10 @@ import { IUser } from "../../models/IUser";
 const BASE_URL = "http://localhost:8080/user/";
 
 export async function Get() {
-  return await axios.get<Array<IUser>>(`${BASE_URL}`);
+  return await axios.get<Array<IUser>>(`${BASE_URL}get`);
 }
 
-export async function Post(params?: IUser) {
+export async function Post(params: any) {
   if (params) {
     return await axios.post<IUser>(`${BASE_URL}create`, params);
   }
@@ -19,12 +19,9 @@ export async function GetId(id?: number | string) {
   }
 }
 
-export async function Update(
-  id?: number,
-  params?: Omit<IUser, "firstname" | "lastname">
-) {
+export async function Update(id?: number, params?: IUser) {
   if (id && params) {
-    return await axios.patch<IUser>(`${BASE_URL}update/${id}}`, params);
+    return await axios.patch<IUser>(`${BASE_URL}update/${id}`, params);
   }
 }
 

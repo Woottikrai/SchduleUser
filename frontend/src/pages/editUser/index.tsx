@@ -9,14 +9,11 @@ import FormEditUser from "../../components/form/editUserForm";
 export default function EditUser() {
   const fileInputRef = React.useRef<HTMLInputElement | any>();
   const [loadingButton, setLoadingButton] = React.useState(false as boolean);
-  const [inputUser, setInputUser] = React.useState(
-    {} as Omit<IUser, "firstname" | "lastname">
-  );
+  const [inputUser, setInputUser] = React.useState({} as IUser);
   const [preview, setPreview] = React.useState<string | any>();
   const [inputImage, setInputImage] = React.useState<File>();
   const [error, setError] = React.useState("");
   const { id } = useParams();
-  const idNumber = Number(id);
   const navigate = useNavigate();
 
   const handleChange = (
@@ -47,8 +44,8 @@ export default function EditUser() {
     if (data) {
       setInputUser({
         email: data.data.email,
-        // firstname: data.data.name?.split(" ")[0],
-        // lastname: data.data.name?.split(" ")[1],
+        firstname: data.data.name?.split(" ")[0],
+        lastname: data.data.name?.split(" ")[1],
         idline: data.data.idline,
         image: data.data.image,
         position: data.data.position,
@@ -65,13 +62,22 @@ export default function EditUser() {
         setLoadingButton(false);
       }, 3000);
 
-      // inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
-      inputUser.name = "thanawat ";
-      console.log(inputUser);
+      inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
+      inputUser.image = `${inputUser.image}`;
+      // inputUser.name = "thanawat ";
+      const resData: IUser = {
+        email: inputUser.email,
+        idline: inputUser.idline,
+        image: inputUser.image,
+        password: inputUser.password,
+        position: inputUser.position,
+        tel: inputUser.tel,
+        name: inputUser.name,
+      };
 
-      const data = await ApiUser.Update(Number(id), inputUser);
-      // console.log(data);
-      // console.log(inputUser);
+      console.log(resData);
+
+      const data = await ApiUser.Update(Number(id), resData);
 
       setError("");
     } catch (error) {
@@ -90,7 +96,6 @@ export default function EditUser() {
   };
 
   React.useEffect(() => {
-    getValueUser(id);
     if (inputImage) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -103,6 +108,8 @@ export default function EditUser() {
     } else {
       setPreview(null);
     }
+
+    getValueUser(id);
   }, [inputImage]);
 
   return (
@@ -125,9 +132,9 @@ export default function EditUser() {
         onSubmit={handleSubmit}
         valueSelectPosition={inputUser.position}
         valueInputEmail={inputUser.email}
-        valueInputFirstname={""}
+        valueInputFirstname={inputUser.firstname}
         valueInputImage={""}
-        valueInputLastname={""}
+        valueInputLastname={inputUser.lastname}
         valueInputeTel={inputUser.tel}
         valueInputConfirmPassword={inputUser.confirmpassword}
         valueInputIdline={inputUser.idline}

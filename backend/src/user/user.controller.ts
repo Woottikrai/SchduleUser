@@ -28,17 +28,22 @@ export class UserController {
   }
 
   @Get('find/:id')
-  findOne(@Param('id') id: string) {
-    return this.userService.findOne(+id);
+  findOne(@Param('id') id: number) {
+    return this.userService.findOne(id);
   }
 
   @Patch('update/:id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
-    return this.userService.update(+id, updateUserDto);
+  update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
+    // // console.log(typeof id);
+    // // console.log('id:', id);
+
+    // console.log(`${updateUserDto} ${id}`);
+
+    return this.userService.update(id, updateUserDto);
   }
 
   @Delete('delete/:id')
-  remove(@Param('id') id: string) {
-    return this.userService.remove(+id);
+  remove(@Param('id') id: number) {
+    return this.userService.remove(id);
   }
 }

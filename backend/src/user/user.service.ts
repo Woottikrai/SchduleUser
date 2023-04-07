@@ -41,8 +41,9 @@ export class UserService {
 
   async update(id: number, bodyuser: UpdateUserDto) {
     try {
-      const update = await this.userRepository.update(id, bodyuser);
-      return update;
+      const findUser = await this.findOne(id);
+      const update = this.userRepository.merge(findUser, { ...bodyuser });
+      return this.userRepository.save(update);
     } catch (error) {
       throw error;
     }
@@ -60,8 +61,8 @@ export class UserService {
 
   async randomuser() {
     try {
-      const randuser = await Math.floor(Math.random() * 100);
-      return await this.findOne(randuser);
+      // const randuser = await Math.floor(Math.random() * 100);
+      // return await this.findOne(randuser);
     } catch (error) {
       throw error;
     }
