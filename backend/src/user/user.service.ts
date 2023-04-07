@@ -9,7 +9,7 @@ import * as dayjs from 'dayjs';
 export class UserService {
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
+    public userRepository: Repository<User>,
   ) {}
 
   async create(body: CreateUserDto): Promise<User> {

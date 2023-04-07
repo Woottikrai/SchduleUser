@@ -11,17 +11,17 @@ export class Calendar {
   id: number;
 
   @Column()
-  daymon: string[];
+  daymon: string;
 
   @Column()
-  daytue: string[];
+  daytue: string;
 
   @Column()
-  daywed: string[];
+  daywed: string;
 
   @Column()
-  daythu: string[];
+  daythu: string;
 
   @Column()
-  dayfri: string[];
+  dayfri: string;
 }
