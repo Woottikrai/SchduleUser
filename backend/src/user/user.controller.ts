@@ -34,10 +34,10 @@ export class UserController {
 
   @Patch('update/:id')
   update(@Param('id') id: number, @Body() updateUserDto: UpdateUserDto) {
-    console.log(typeof id);
-    console.log('id:', id);
+    // // console.log(typeof id);
+    // // console.log('id:', id);
 
-    console.log(`${updateUserDto} ${id}`);
+    // console.log(`${updateUserDto} ${id}`);
 
     return this.userService.update(id, updateUserDto);
   }
