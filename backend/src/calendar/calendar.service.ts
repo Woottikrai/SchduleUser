@@ -5,24 +5,56 @@ import { Repository } from 'typeorm';
 import { Calendar } from './entities/calendar.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
-
+import { UserService } from 'src/user/user.service';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 @Injectable()
 export class CalendarService {
   constructor(
     @InjectRepository(Calendar)
     private calendarRepository: Repository<Calendar>,
+    private userService: UserService,
   ) {}
 
-  async create(bodyCalendar: CreateCalendarDto) {
+  async createdate() {
     try {
-      const { date } = bodyCalendar;
-      const createcalendar = await this.calendarRepository.save({
-        date: dayjs(date).toDate(),
-      });
-      return createcalendar;
+      let isSameOrBefore = require('dayjs/plugin/isSameOrBefore');
+      dayjs.extend(isSameOrBefore);
+      const startDate = dayjs().startOf('week').add(1, 'day'); // Monday of current week
+      const endDate = dayjs().startOf('week').add(5, 'day'); // Friday of current week
+      const daysOfWeek = [];
+
+      for (
+        let date = startDate;
+        date.isSameOrBefore(endDate);
+        date = date.add(1, 'day')
+      ) {
+        daysOfWeek.push({
+          date: date.format('DD-MM-YYYY'),
+        });
+      }
+      console.log(daysOfWeek);
+      for (let d of daysOfWeek) {
+        console.log(d);
+        const createdate = await this.calendarRepository.save({
+          ...this.calendarRepository,
+          date: dayjs(d.date).format('YYYY-MM-DD'),
+        });
+      }
     } catch (error) {
       throw error;
     }
+  }
+
+  async create(bodyCalendar: CreateCalendarDto) {
+    // try {
+    //   const { date } = bodyCalendar;
+    //   const createcalendar = await this.calendarRepository.save({
+    //     date: dayjs(date).toDate(),
+    //   });
+    //   return createcalendar;
+    // } catch (error) {
+    //   throw error;
+    // }
   }
 
   async findAll() {

@@ -1,5 +1,10 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-
+import {
+  Column,
+  Entity,
+  JoinTable,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 @Entity('calendar')
 export class Calendar {
   @PrimaryGeneratedColumn()

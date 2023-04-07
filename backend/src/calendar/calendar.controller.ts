@@ -22,6 +22,11 @@ export class CalendarController {
     return this.calendarService.create(createCalendarDto);
   }
 
+  @Get('create')
+  date() {
+    return this.calendarService.createdate();
+  }
+
   @Get('get')
   findAll() {
     return this.calendarService.findAll();

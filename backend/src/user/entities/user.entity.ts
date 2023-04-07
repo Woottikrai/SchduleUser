@@ -4,6 +4,7 @@ import {
   PrimaryGeneratedColumn,
   ManyToOne,
   OneToMany,
+  JoinTable,
 } from 'typeorm';
 
 @Entity('user')
@@ -21,7 +22,13 @@ export class User {
   password: string;
 
   @Column()
+  image: string;
+
+  @Column()
   idline: string;
+
+  @Column()
+  position: string;
 
   @Column()
   tel: string;

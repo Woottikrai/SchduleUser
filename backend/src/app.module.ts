@@ -6,9 +6,9 @@ import { User } from './user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
-import { CalendauserModule } from './calendauser/calendauser.module';
 import { GroupNameModule } from './group-name/group-name.module';
 import { NotiLineModule } from './noti-line/noti-line.module';
+
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -23,7 +23,6 @@ import { NotiLineModule } from './noti-line/noti-line.module';
     }),
     UserModule,
     CalendarModule,
-    CalendauserModule,
     GroupNameModule,
     NotiLineModule,
   ],
