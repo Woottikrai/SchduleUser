@@ -6,7 +6,7 @@ import { Calendar } from './entities/calendar.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as dayjs from 'dayjs';
 import { UserService } from 'src/user/user.service';
-
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 @Injectable()
 export class CalendarService {
   constructor(
@@ -15,59 +15,34 @@ export class CalendarService {
     private userService: UserService,
   ) {}
 
-  async random() {
-    let data = [];
-    let daymon = [];
-    let daytue = [];
-    let daywed = [];
-    let daythu = [];
-    let dayfri = [];
-    let index = 0;
-    const dayjs = require('dayjs');
-    const dateNow = new Date();
-    const checkDay = dayjs(dateNow).format('ddd');
-    // const day = dayjs().set('day', 1).format('ddd'); //mon
-    const users = await this.userService.findUserAll();
-    for (const u of users) {
-      const b = dayjs(dateNow).add(index, 'day').format('ddd').toString();
-      const dayofwk = dayjs(dateNow)
-        .add(index, 'day')
-        .format('DD/MM/YYYY')
-        .toString();
+  async createdate() {
+    try {
+      let isSameOrBefore = require('dayjs/plugin/isSameOrBefore');
+      dayjs.extend(isSameOrBefore);
+      const startDate = dayjs().startOf('week').add(1, 'day'); // Monday of current week
+      const endDate = dayjs().startOf('week').add(5, 'day'); // Friday of current week
+      const daysOfWeek = [];
 
-      if (daymon.length <= 2 && checkDay === ' Mon') {
-        const randomElement = users[Math.floor(Math.random() * users.length)];
-        daymon.push(randomElement, dayofwk);
-        index++;
-      } else if (daythu.length <= 2 && b === 'Tue') {
-        const randomElement = users[Math.floor(Math.random() * users.length)];
-        daytue.push(randomElement, dayofwk);
-        index++;
-      } else if (daywed.length <= 2 && b === 'Wed') {
-        const randomElement = users[Math.floor(Math.random() * users.length)];
-        daywed.push(randomElement, dayofwk);
-        index++;
-      } else if (daythu.length <= 2 && b === 'Thu') {
-        const randomElement = users[Math.floor(Math.random() * users.length)];
-        daythu.push(randomElement, dayofwk);
-        index++;
-      } else if (dayfri.length <= 2 && b === 'Fri') {
-        const randomElement = users[Math.floor(Math.random() * users.length)];
-        dayfri.push(randomElement, dayofwk);
-        index = 0;
+      for (
+        let date = startDate;
+        date.isSameOrBefore(endDate);
+        date = date.add(1, 'day')
+      ) {
+        daysOfWeek.push({
+          date: date.format('DD-MM-YYYY'),
+        });
       }
+      // console.log(daysOfWeek);
+      for (let d of daysOfWeek) {
+        // console.log(d);
+        const createdate = await this.calendarRepository.save({
+          ...this.calendarRepository,
+          date: dayjs(d.date).format('YYYY-MM-DD'),
+        });
+      }
+    } catch (error) {
+      throw error;
     }
-
-    data.push({
-      daymon: daymon,
-      daytue: daytue,
-      daywed: daywed,
-      daythu: daythu,
-      dayfri: dayfri,
-    });
-    console.log(data);
-    console.log('This is ', checkDay);
-    return data;
   }
 
   async create(bodyCalendar: CreateCalendarDto) {

@@ -9,6 +9,6 @@
   padding: 0;
 }
 
-h1 {
+h1, p {
   font-family: 'Quicksand', sans-serif;
 }

@@ -11,11 +11,14 @@ export class CreateUserDto {
   password: string;
 
   @ApiProperty()
+  image: string;
+
+  @ApiProperty()
+  position: string;
+
+  @ApiProperty()
   idline: string;
 
   @ApiProperty()
   tel: string;
-
-  @ApiProperty()
-  position: string;
 }

@@ -5,17 +5,15 @@ import "./home.css";
 import GridLayout from "../../components/layouts/gridLayout";
 import ICreateder from "../../models/ICreateder";
 import * as DataCreateder from "../../data/createder";
-import Card from "../../components/card";
+import Card from "../../components/card/cardDefault";
+import { Link } from "react-router-dom";
 export default function Home() {
-  const [create, setCreate] = React.useState([] as Array<ICreateder>);
   const handleToLocation = () => {
     window.location.href = "https://github.com/Woottikrai/SchduleUser";
   };
 
   React.useEffect(() => {
-    (async () => {
-      setCreate(DataCreateder.createder);
-    })();
+    (async () => {})();
   }, []);
   return (
     <div>
@@ -35,11 +33,39 @@ export default function Home() {
           <div className="mx-.5"></div>
           <Button size="large">Default Button</Button>
         </Space>
+
         <GridLayout
-          className="container mx-auto grid grid-cols-4 gap-10 mt-24"
-          items={create}
+          className="container max-w-6xl mx-auto grid grid-cols-3 gap-10 mt-24"
+          items={DataCreateder.createder_Top}
           renderItem={({
             item,
+            key,
+          }: {
+            item: ICreateder;
+            idx: number;
+            array: Array<ICreateder>;
+            key: string | number;
+          }) => {
+            return (
+              <Link key={key} to={item.path}>
+                <Card
+                  title={item.name}
+                  description={item.description}
+                  position={item.position}
+                  className="card-top rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
+                  id=""
+                />
+              </Link>
+            );
+          }}
+        />
+
+        <GridLayout
+          className="container max-w-3xl mx-auto grid grid-cols-2 gap-10 mt-10"
+          items={DataCreateder.createder_Bottom}
+          renderItem={({
+            item,
+            idx,
           }: {
             item: ICreateder;
             idx: number;
@@ -48,11 +74,11 @@ export default function Home() {
           }) => {
             return (
               <Card
-                id={item.id}
                 title={item.name}
                 description={item.description}
                 position={item.position}
-                className="text-start rounded-lg transition-all delay-75 p-5 card cursor-pointer hover:shadow-xl "
+                className="card-bottom rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
+                id=""
               />
             );
           }}

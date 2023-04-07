@@ -1,3 +1,4 @@
+import { Schedule } from 'src/schedule/entities/schedule.entity';
 import {
   Entity,
   Column,
@@ -22,14 +23,17 @@ export class User {
   password: string;
 
   @Column()
-  idline: string;
+  image: string;
 
   @Column()
-  tel: string;
+  idline: string;
 
   @Column()
   position: string;
 
   @Column()
-  picture: string;
+  tel: string;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.user) //user เชื่อม schedule
+  schedule: Schedule[];
 }

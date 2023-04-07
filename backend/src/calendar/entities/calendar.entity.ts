@@ -1,3 +1,4 @@
+import { Schedule } from 'src/schedule/entities/schedule.entity';
 import {
   Column,
   Entity,
@@ -11,17 +12,8 @@ export class Calendar {
   id: number;
 
   @Column()
-  daymon: string[];
+  date: Date;
 
-  @Column()
-  daytue: string[];
-
-  @Column()
-  daywed: string[];
-
-  @Column()
-  daythu: string[];
-
-  @Column()
-  dayfri: string[];
+  @OneToMany(() => Schedule, (schedule) => schedule.calendar)
+  schedule: Schedule[];
 }
