@@ -6,6 +6,7 @@ import { User } from './user/entities/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
+import { NotiLineModule } from './noti-line/noti-line.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { Calendar } from './calendar/entities/calendar.entity';
     }),
     UserModule,
     CalendarModule,
+    NotiLineModule,
   ],
   controllers: [AppController],
   providers: [AppService],
