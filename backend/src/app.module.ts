@@ -15,10 +15,10 @@ import { Schedule } from './schedule/entities/schedule.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: '1234',
-      database: 'project',
+      password: '123',
+      database: 'schedule',
       entities: [User, Calendar, Schedule],
       synchronize: true,
     }),
