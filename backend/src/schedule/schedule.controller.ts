@@ -27,7 +27,7 @@ export class ScheduleController {
     return this.scheduleService.randomuser();
   }
 
-  @Get()
+  @Get('get')
   findAll() {
     return this.scheduleService.findAll();
   }
