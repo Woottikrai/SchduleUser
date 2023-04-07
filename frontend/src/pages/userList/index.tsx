@@ -1,5 +1,5 @@
-import React from "react";
-import { Button, Input } from "antd";
+import React, { useState } from "react";
+import { Button, Input, Modal } from "antd";
 import "./userList.css";
 import { UserDeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -12,18 +12,52 @@ import { PlusOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 
 import CardUserList from "../../components/card/cardUserList";
 import TableComponent from "../../components/tablecomponent";
+import { wait } from "../../utils/wait";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser>);
   const [searchText, setSearchText] = React.useState("");
   const navigate = useNavigate();
-  const handleEditUser = (idx?: number) => {
-    navigate(`${idx}/EditUser`);
+  const [open, setOpen] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [modalText, setModalText] = React.useState("Are you sure to delete?");
+
+  const [selected, setSelected] = useState<IUser>();
+
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = async (idx?: string) => {
+    console.log(idx);
+
+    try {
+      setModalText("The modal will be closed after two seconds");
+      setConfirmLoading(true);
+      setTimeout(() => {
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 2000);
+      await ApiUser.Delete(Number(idx));
+    } catch (err) {
+      alert(err);
+    } finally {
+      setTimeout(async () => {
+        const { data } = await ApiUser.Get();
+        setUsers(data);
+      }, 2000);
+    }
   };
 
-  const handleDelete = async (idx?: number) => {
-    window.location.reload();
-    await ApiUser.Delete(idx);
+  // const handleTest = (idx: any) => {
+  //   console.log(idx);
+  // };
+
+  const handleCancel = () => {
+    // console.log("Clicked cancel button");
+    setOpen(false);
+  };
+  const handleEditUser = (idx?: string) => {
+    navigate(`${idx}/EditUser`);
   };
 
   const handleAddUser = () => {
@@ -40,20 +74,16 @@ export default function UserList() {
       },
       action: {
         edit: (
-          <button
-            className="bg-transparent border-0 text-lg cursor-pointer text-blue-500"
-            onClick={() => handleEditUser(item.id)}
-          >
+          <button className="bg-transparent border-0 text-lg cursor-pointer text-blue-500">
             <EditOutlined />
           </button>
         ),
         delete: (
-          <button
-            className="bg-transparent border-0 text-lg cursor-pointer text-red-500"
-            onClick={() => handleDelete(item.id)}
-          >
-            <UserDeleteOutlined />
-          </button>
+          <>
+            <button className="bg-transparent border-0 text-lg cursor-pointer text-red-500">
+              <UserDeleteOutlined />
+            </button>
+          </>
         ),
       },
     };
@@ -65,8 +95,6 @@ export default function UserList() {
   const backendDeverloper = dataTable.filter((bd) => {
     return bd.position === "backend developer";
   });
-
-  console.log(dataTable);
 
   React.useEffect(() => {
     (async () => {
@@ -215,12 +243,21 @@ export default function UserList() {
             dataIndex: "action",
             key: "action",
             align: "center",
-            render: (_, rc: any, index) => {
+            render: (_, rc: any) => {
               return (
                 <div className="flex justify-center align-middle">
-                  {rc.action.edit}
+                  <span onClick={() => handleEditUser(rc.id)}>
+                    {rc.action.edit}
+                  </span>
                   <span className="mx-2"></span>
-                  {rc.action.delete}
+                  <span
+                    onClick={() => {
+                      showModal();
+                      setSelected(rc);
+                    }}
+                  >
+                    {rc.action.delete}
+                  </span>
                 </div>
               );
             },
@@ -228,6 +265,16 @@ export default function UserList() {
         ]}
         dataSource={dataTable}
       />
+      <Modal
+        title={`Delete User ${selected?.name}`}
+        open={open}
+        onOk={() => handleOk(selected?.id)}
+        confirmLoading={confirmLoading}
+        onCancel={handleCancel}
+      >
+        <p>{modalText}</p>
+        {selected?.name}
+      </Modal>
     </div>
   );
 }

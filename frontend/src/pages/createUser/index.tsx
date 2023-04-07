@@ -44,13 +44,8 @@ export default function CreateUser() {
       }, 3000);
 
       inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
-      console.log(inputUser);
 
-      const data = await ApiUser.Post(inputUser);
-      console.log(data);
-
-      // console.log(data);
-      // console.log(inputUser);
+      await ApiUser.Post(inputUser);
 
       setError("");
     } catch (error) {
