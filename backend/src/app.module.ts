@@ -8,6 +8,7 @@ import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
 import { AuthModule } from './auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
+import { ExportExcelModule } from './export-excel/export-excel.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     CalendarModule,
     AuthModule,
+    ExportExcelModule,
 
   ],
   controllers: [AppController],
