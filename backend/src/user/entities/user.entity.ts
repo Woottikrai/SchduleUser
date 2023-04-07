@@ -1,3 +1,4 @@
+import { Schedule } from 'src/schedule/entities/schedule.entity';
 import {
   Entity,
   Column,
@@ -32,4 +33,7 @@ export class User {
 
   @Column()
   tel: string;
+
+  @OneToMany(() => Schedule, (schedule) => schedule.user) //user เชื่อม schedule
+  schedule: Schedule[];
 }

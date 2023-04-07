@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
 import { NotiLineModule } from './noti-line/noti-line.module';
+import { ScheduleModule } from './schedule/schedule.module';
+import { Schedule } from './schedule/entities/schedule.entity';
 
 @Module({
   imports: [
@@ -17,12 +19,13 @@ import { NotiLineModule } from './noti-line/noti-line.module';
       username: 'postgres',
       password: '1234',
       database: 'project',
-      entities: [User, Calendar],
+      entities: [User, Calendar, Schedule],
       synchronize: true,
     }),
     UserModule,
     CalendarModule,
     NotiLineModule,
+    ScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],

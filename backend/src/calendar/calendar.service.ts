@@ -32,9 +32,9 @@ export class CalendarService {
           date: date.format('DD-MM-YYYY'),
         });
       }
-      console.log(daysOfWeek);
+      // console.log(daysOfWeek);
       for (let d of daysOfWeek) {
-        console.log(d);
+        // console.log(d);
         const createdate = await this.calendarRepository.save({
           ...this.calendarRepository,
           date: dayjs(d.date).format('YYYY-MM-DD'),
