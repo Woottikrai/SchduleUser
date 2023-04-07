@@ -20,7 +20,7 @@ export default function Booking() {
   console.log(moment().isoWeekday());
   const handleDate = async (idx: string | number) => {
     const value = `2023-04-0${idx}`;
-    console.log(value);
+    // console.log(value);
 
     await ApiCalendar.Post({ date: value });
   };
@@ -48,7 +48,7 @@ export default function Booking() {
           );
         })}
       </div>
-      <div className=" bg-gray-50 border border-gray-300 text-gray-900 text-sm w-full mx-auto p-2.5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+      <div className=" bg-gray-50 border border-gray-300 text-gray-900 h-96 text-sm w-full mx-auto p-2.5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <GridLayout
           items={initialUsers}
           className="grid md:grid-cols-5 md:gap-5"

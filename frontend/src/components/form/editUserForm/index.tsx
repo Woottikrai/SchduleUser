@@ -28,7 +28,7 @@ type FormProps = {
   onClickButton: React.MouseEventHandler<HTMLButtonElement> | any;
   onClickReset?: React.MouseEventHandler<HTMLButtonElement>;
   preview: string;
-  valueInputImage?: string;
+  valueInputImage?: string | any;
   valueInputEmail?: string;
   valueInputFirstname?: string;
   valueInputLastname?: string;

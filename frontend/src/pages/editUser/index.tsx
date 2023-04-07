@@ -14,8 +14,6 @@ export default function EditUser() {
   const [inputImage, setInputImage] = React.useState<File>();
   const [error, setError] = React.useState("");
   const { id } = useParams();
-
-  const idNumber = Number(id);
   const navigate = useNavigate();
 
   const handleChange = (
@@ -65,8 +63,8 @@ export default function EditUser() {
       }, 3000);
 
       inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
+      inputUser.image = `${inputUser.image}`;
       // inputUser.name = "thanawat ";
-      console.log(inputUser);
       const resData: IUser = {
         email: inputUser.email,
         idline: inputUser.idline,
@@ -76,6 +74,7 @@ export default function EditUser() {
         tel: inputUser.tel,
         name: inputUser.name,
       };
+
       console.log(resData);
 
       const data = await ApiUser.Update(Number(id), resData);
@@ -97,7 +96,6 @@ export default function EditUser() {
   };
 
   React.useEffect(() => {
-    getValueUser(id);
     if (inputImage) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -110,6 +108,8 @@ export default function EditUser() {
     } else {
       setPreview(null);
     }
+
+    getValueUser(id);
   }, [inputImage]);
 
   return (
