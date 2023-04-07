@@ -1,15 +1,20 @@
 import axios from "axios";
+import IDate from "../../models/IDate";
 import { IUser } from "../../models/IUser";
 
-const BASE_URL = "http://localhost:8080/user/";
+const BASE_URL = "http://localhost:8080/schedule/";
 
 export async function Get() {
   return await axios.get<Array<IUser>>(`${BASE_URL}get`);
 }
 
-export async function Post(params?: IUser) {
+export async function Random() {
+  return await axios.get<Array<IUser>>(`${BASE_URL}random`);
+}
+
+export async function Post(params?: any) {
   if (params) {
-    return await axios.post<IUser>(`${BASE_URL}create`, params);
+    return await axios.post<IUser>(`${BASE_URL}post`, params);
   }
 }
 
@@ -24,7 +29,7 @@ export async function Update(
   params?: Omit<IUser, "firstname" | "lastname">
 ) {
   if (id && params) {
-    return await axios.patch<IUser>(`${BASE_URL}update/${id}`, params);
+    return await axios.patch<IUser>(`${BASE_URL}update/${id}}`, params);
   }
 }
 

@@ -14,7 +14,7 @@ import { Schedule } from './schedule/entities/schedule.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
       password: '12345',
       database: 'project',

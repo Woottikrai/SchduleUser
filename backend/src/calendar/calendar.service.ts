@@ -59,7 +59,9 @@ export class CalendarService {
 
   async findAll() {
     try {
-      const findAll = await this.calendarRepository.find();
+      const findAll = await this.calendarRepository.find({
+        relations: ['schedule', 'schedule.calendar'],
+      });
       return findAll;
     } catch (error) {
       throw error;
