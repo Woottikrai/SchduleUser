@@ -1,7 +1,8 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { CreateNotiemailDto } from './dto/create-notiemail.dto';
 import { UpdateNotiemailDto } from './dto/update-notiemail.dto';
 import * as nodemailer from 'nodemailer';
+import { Cron, CronExpression } from '@nestjs/schedule';
 
 @Injectable()
 export class NotiemailService {
@@ -13,8 +14,8 @@ export class NotiemailService {
     auth: { user: 'phakphumninart@gmail.com', pass: 'yoxwmueyqtkleoiw' },
   });
 
+  @Cron(CronExpression.MONDAY_TO_FRIDAY_AT_10AM)
   async sendMail() {
-    const cron = require('node-cron');
     try {
       await this.transport.sendMail({
         to: 'pakpumdd@gmail.com',
@@ -23,9 +24,6 @@ export class NotiemailService {
         text: 'welcome',
         html: '<b>-------------ทำเวรด้วยจ้าาาาาาา----------</b>',
       });
-      // if () {
-      //   return ;
-      // }
     } catch (error) {
       throw error;
     }

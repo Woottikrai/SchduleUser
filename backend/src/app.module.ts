@@ -9,6 +9,7 @@ import { Calendar } from './calendar/entities/calendar.entity';
 // import { CalendauserModule } from './calendauser/calendauser.module';
 // import { Calendauser } from './calendauser/entities/calendauser.entity';
 import { NotiemailModule } from './notiemail/notiemail.module';
+import { ScheduleModule } from '@nestjs/schedule';
 @Module({
   imports: [
     //   TypeOrmModule.forRoot({
@@ -25,6 +26,8 @@ import { NotiemailModule } from './notiemail/notiemail.module';
     //   CalendarModule,
     //   // CalendauserModule,
     NotiemailModule,
+    ScheduleModule.forRoot(),
+    // MailerModule.forRoot()
   ],
   controllers: [AppController],
   providers: [AppService],
