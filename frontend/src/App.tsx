@@ -9,7 +9,6 @@ import Booking from "./pages/booking";
 import ErrorPage from "./pages/errorPage";
 import Date from "./pages/signin";
 
-import TestPage from "./pages/testPage";
 import CreateUser from "./pages/createUser";
 import EditUser from "./pages/editUser";
 
@@ -21,7 +20,6 @@ function App() {
     { path: "/CreateUser", element: <CreateUser /> },
     { path: "/userList/:id/EditUser", element: <EditUser /> },
     { path: "/Booking", element: <Booking /> },
-    { path: "/Test", element: <TestPage /> },
     { path: "/*", element: <ErrorPage /> },
   ];
   return (

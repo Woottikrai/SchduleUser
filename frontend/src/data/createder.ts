@@ -20,7 +20,7 @@ export const createder_Top: Array<ICreateder> = [
     name: "Phakphum Ninart",
     description: "รับผิดชอบในส่วนของการทำ Email ของฝั่ง backend",
     position: "backend developer",
-    path: "https://github.com/Thanawat-Launakorn/",
+    path: "https://github.com/PPhum",
   },
 ];
 
@@ -30,7 +30,7 @@ export const createder_Bottom: Array<ICreateder> = [
     name: "Pananda Srisawat",
     description: "รับผิดชอบในส่วนของการทำ Line ของฝั่ง backend",
     position: "backend developer",
-    path: "https://github.com/Thanawat-Launakorn/",
+    path: "https://github.com/Panadsada",
   },
 
   {
@@ -38,6 +38,6 @@ export const createder_Bottom: Array<ICreateder> = [
     name: "Wallaya Patisang",
     description: "รับผิดชอบในส่วนของการทำ Login ของฝั่ง backend",
     position: "backend developer",
-    path: "https://github.com/Thanawat-Launakorn/",
+    path: "https://github.com/Wallaya007",
   },
 ];
