@@ -32,10 +32,4 @@ export class User {
 
   @Column()
   tel: string;
-
-  @Column()
-  position: string;
-
-  @Column()
-  picture: string;
 }

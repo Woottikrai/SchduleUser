@@ -21,7 +21,4 @@ export class CreateUserDto {
 
   @ApiProperty()
   tel: string;
-
-  @ApiProperty()
-  position: string;
 }

@@ -12,10 +12,10 @@ import { Calendar } from './calendar/entities/calendar.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5433,
+      port: 5432,
       username: 'postgres',
-      password: '123',
-      database: 'schedule',
+      password: '1234',
+      database: 'project',
       entities: [User, Calendar],
       synchronize: true,
     }),
