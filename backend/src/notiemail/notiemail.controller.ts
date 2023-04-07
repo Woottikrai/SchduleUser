@@ -10,7 +10,9 @@ import {
 import { NotiemailService } from './notiemail.service';
 import { CreateNotiemailDto } from './dto/create-notiemail.dto';
 import { UpdateNotiemailDto } from './dto/update-notiemail.dto';
+import { ApiTags } from '@nestjs/swagger';
 
+@ApiTags('notifyEmail')
 @Controller('notiemail')
 export class NotiemailController {
   constructor(private readonly notiemailService: NotiemailService) {}

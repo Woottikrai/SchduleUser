@@ -18,12 +18,13 @@ export class NotiemailService {
   async sendMail() {
     try {
       await this.transport.sendMail({
-        to: 'pakpumdd@gmail.com',
+        to: 'pakpumdd@gmail.com', //Email User
         from: 'phakphumninart@gmail.com',
         subject: 'shift',
         text: 'welcome',
-        html: '<b>-------------ทำเวรด้วยจ้าาาาาาา----------</b>',
+        html: '<b>-------------วันนี้เป็นเวรของคุณ----------</b>',
       });
+      return true;
     } catch (error) {
       throw error;
     }
