@@ -1,5 +1,6 @@
 import React from "react";
 import ICreateder from "../../models/ICreateder";
+import { IUser } from "../../models/IUser";
 type GridLayoutProps<T> = {
   className?: string;
   items: Array<T>;
@@ -15,7 +16,7 @@ export default function GridLayout({
   className,
   items,
   renderItem,
-}: GridLayoutProps<ICreateder>) {
+}: GridLayoutProps<any>) {
   return (
     <div className={`${className}`}>
       {items?.map((item, idx, array) => {
