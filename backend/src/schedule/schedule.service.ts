@@ -58,7 +58,9 @@ export class ScheduleService {
 
   async findAll() {
     try {
-      const findAll = await this.scheduleRepo.find();
+      const findAll = await this.scheduleRepo.find({
+        relations: ['user', 'calendar'],
+      });
       return findAll;
     } catch (error) {
       throw error;
