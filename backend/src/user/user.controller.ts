@@ -17,11 +17,7 @@ import { ApiTags } from '@nestjs/swagger';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-<<<<<<< HEAD
-  @Post('post')
-=======
   @Post('create')
->>>>>>> frontend
   create(@Body() createUserDto: CreateUserDto) {
     return this.userService.create(createUserDto);
   }
@@ -36,11 +32,7 @@ export class UserController {
     return this.userService.findOne(+id);
   }
 
-<<<<<<< HEAD
-  @Patch('patch/:id')
-=======
   @Patch('update/:id')
->>>>>>> frontend
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.userService.update(+id, updateUserDto);
   }

@@ -16,12 +16,6 @@ export class UpdateUserDto {
   image: string;
 
   @ApiProperty()
-<<<<<<< HEAD
-  tel?: string;
-
-  @ApiProperty()
-  position?: string;
-=======
   position: string;
 
   @ApiProperty()
@@ -29,5 +23,4 @@ export class UpdateUserDto {
 
   @ApiProperty()
   tel: string;
->>>>>>> frontend
 }
