@@ -3,13 +3,16 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
-import { Repository } from 'typeorm';
+import { Repository, getConnection } from 'typeorm';
 import * as dayjs from 'dayjs';
+import { Schedule } from 'src/schedule/entities/schedule.entity';
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
+    @InjectRepository(Schedule)
+    private scheduleRepository: Repository<Schedule>,
   ) {}
 
   async create(body: CreateUserDto): Promise<User> {
@@ -52,9 +55,21 @@ export class UserService {
 
   async remove(id: number) {
     try {
-      const remove = await this.findOne(id);
-      await this.userRepository.delete(id);
-      return remove;
+      const remove = await this.userRepository.findOne({
+        where: { id: id },
+      });
+
+      const findRelation = await this.scheduleRepository.find({
+        where: { user: remove },
+      });
+
+      if (findRelation.length > 0) {
+        for (const oneSchedule of findRelation) {
+          await this.scheduleRepository.delete(oneSchedule);
+        }
+      }
+      await this.userRepository.delete(remove);
+      return true;
     } catch (error) {
       throw error;
     }
@@ -62,7 +77,7 @@ export class UserService {
 
   async randomuser() {
     try {
-      const randuser = await Math.floor(Math.random() * 100);
+      const randuser = Math.floor(Math.random() * 100);
       return await this.findOne(randuser);
     } catch (error) {
       throw error;

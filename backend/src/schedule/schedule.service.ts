@@ -35,6 +35,7 @@ export class ScheduleService {
               .where('scheduleUser.id = :id', { id: randomuser.id }) //where
               .andWhere('scheduleCalendar.id = :id', { id: c.id })
               .getOne();
+
             if (!qb) {
               const schedule = await this.scheduleRepo.save({
                 calendar: c,
