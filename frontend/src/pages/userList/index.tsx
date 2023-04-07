@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Input } from "antd";
+import { Button, Input, Modal } from "antd";
 import "./userList.css";
 import { UserDeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -12,18 +12,44 @@ import { PlusOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 
 import CardUserList from "../../components/card/cardUserList";
 import TableComponent from "../../components/tablecomponent";
+import { wait } from "../../utils/wait";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser>);
   const [searchText, setSearchText] = React.useState("");
   const navigate = useNavigate();
-  const handleEditUser = (idx?: number) => {
-    navigate(`${idx}/EditUser`);
+  const [open, setOpen] = React.useState(false);
+  const [confirmLoading, setConfirmLoading] = React.useState(false);
+  const [modalText, setModalText] = React.useState("Are you sure to delete?");
+
+  const showModal = () => {
+    setOpen(true);
+  };
+  const handleOk = async (idx?: number) => {
+    try {
+      setModalText("The modal will be closed after two seconds");
+      setConfirmLoading(true);
+      setTimeout(() => {
+        setOpen(false);
+        setConfirmLoading(false);
+      }, 2000);
+      await ApiUser.Delete(idx);
+    } catch (err) {
+      alert(err);
+    } finally {
+      setTimeout(async () => {
+        const { data } = await ApiUser.Get();
+        setUsers(data);
+      }, 2000);
+    }
   };
 
-  const handleDelete = async (idx?: number) => {
-    window.location.reload();
-    await ApiUser.Delete(idx);
+  const handleCancel = () => {
+    // console.log("Clicked cancel button");
+    setOpen(false);
+  };
+  const handleEditUser = (idx?: number) => {
+    navigate(`${idx}/EditUser`);
   };
 
   const handleAddUser = () => {
@@ -48,12 +74,24 @@ export default function UserList() {
           </button>
         ),
         delete: (
-          <button
-            className="bg-transparent border-0 text-lg cursor-pointer text-red-500"
-            onClick={() => handleDelete(item.id)}
-          >
-            <UserDeleteOutlined />
-          </button>
+          <>
+            <button
+              className="bg-transparent border-0 text-lg cursor-pointer text-red-500"
+              onClick={showModal}
+            >
+              <UserDeleteOutlined />
+            </button>
+
+            <Modal
+              title={`Delete User ${item.name}`}
+              open={open}
+              onOk={() => handleOk(item.id)}
+              confirmLoading={confirmLoading}
+              onCancel={handleCancel}
+            >
+              <p>{modalText}</p>
+            </Modal>
+          </>
         ),
       },
     };
@@ -65,8 +103,6 @@ export default function UserList() {
   const backendDeverloper = dataTable.filter((bd) => {
     return bd.position === "backend developer";
   });
-
-  console.log(dataTable);
 
   React.useEffect(() => {
     (async () => {
