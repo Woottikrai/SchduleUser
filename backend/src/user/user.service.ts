@@ -23,7 +23,9 @@ export class UserService {
 
   async findUserAll() {
     try {
-      const findUserAll = await this.userRepository.find();
+      const findUserAll = await this.userRepository.find({
+        relations: ['schedule'],
+      });
       return findUserAll;
     } catch (error) {
       throw error;

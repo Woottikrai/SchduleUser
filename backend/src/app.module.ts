@@ -7,7 +7,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CalendarModule } from './calendar/calendar.module';
 import { Calendar } from './calendar/entities/calendar.entity';
 import { NotiLineModule } from './noti-line/noti-line.module';
-import { ScheduleModule } from './schedule/schedule.module';
 import { Schedule } from './schedule/entities/schedule.entity';
 
 @Module({
@@ -17,7 +16,7 @@ import { Schedule } from './schedule/entities/schedule.entity';
       host: 'localhost',
       port: 5432,
       username: 'postgres',
-      password: '1234',
+      password: '12345',
       database: 'project',
       entities: [User, Calendar, Schedule],
       synchronize: true,
@@ -25,7 +24,6 @@ import { Schedule } from './schedule/entities/schedule.entity';
     UserModule,
     CalendarModule,
     NotiLineModule,
-    ScheduleModule,
   ],
   controllers: [AppController],
   providers: [AppService],
