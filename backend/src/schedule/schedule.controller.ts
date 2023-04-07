@@ -37,16 +37,16 @@ export class ScheduleController {
   //   return this.scheduleService.findOne(+id);
   // }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateScheduleDto: UpdateScheduleDto,
-  // ) {
-  //   return this.scheduleService.update(+id, updateScheduleDto);
-  // }
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateScheduleDto: UpdateScheduleDto,
+  ) {
+    return this.scheduleService.update(+id, updateScheduleDto);
+  }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.scheduleService.remove(+id);
-  // }
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.scheduleService.remove(+id);
+  }
 }

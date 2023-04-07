@@ -65,7 +65,7 @@ export default function Home() {
           items={DataCreateder.createder_Bottom}
           renderItem={({
             item,
-            idx,
+            key,
           }: {
             item: ICreateder;
             idx: number;
@@ -73,13 +73,15 @@ export default function Home() {
             key: string | number;
           }) => {
             return (
-              <Card
-                title={item.name}
-                description={item.description}
-                position={item.position}
-                className="card-bottom rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
-                id=""
-              />
+              <Link key={key} to={item.path}>
+                <Card
+                  title={item.name}
+                  description={item.description}
+                  position={item.position}
+                  className="card-top rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
+                  id=""
+                />
+              </Link>
             );
           }}
         />

@@ -50,7 +50,7 @@ export default function EditUser() {
         image: data.data.image,
         position: data.data.position,
         tel: data.data.tel,
-        password: data.data.password,
+        password: "",
       });
     }
   };
@@ -63,7 +63,7 @@ export default function EditUser() {
       }, 3000);
 
       inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
-      inputUser.image = `${inputUser.image}`;
+
       // inputUser.name = "thanawat ";
       const resData: IUser = {
         email: inputUser.email,
@@ -133,7 +133,7 @@ export default function EditUser() {
         valueSelectPosition={inputUser.position}
         valueInputEmail={inputUser.email}
         valueInputFirstname={inputUser.firstname}
-        valueInputImage={""}
+        valueInputImage={undefined}
         valueInputLastname={inputUser.lastname}
         valueInputeTel={inputUser.tel}
         valueInputConfirmPassword={inputUser.confirmpassword}
