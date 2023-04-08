@@ -29,7 +29,7 @@ export async function Update(
   params?: Omit<IUser, "firstname" | "lastname">
 ) {
   if (id && params) {
-    return await axios.patch<IUser>(`${BASE_URL}update/${id}}`, params);
+    return await axios.patch<IUser>(`${BASE_URL}update/${id}`, params);
   }
 }
 

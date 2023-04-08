@@ -163,7 +163,7 @@ export default function UserList() {
             key: "columnName",
             align: "center",
             filteredValue: [searchText],
-            onFilter: (value: any, rc: any) => {
+            onFilter: (value: any, rc: IUser) => {
               return String(rc.name)
                 .toLowerCase()
                 .includes(value.toLowerCase());

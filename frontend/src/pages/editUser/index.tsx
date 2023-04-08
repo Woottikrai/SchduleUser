@@ -96,6 +96,8 @@ export default function EditUser() {
   };
 
   React.useEffect(() => {
+    getValueUser(id);
+
     if (inputImage) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -108,8 +110,6 @@ export default function EditUser() {
     } else {
       setPreview(null);
     }
-
-    getValueUser(id);
   }, [inputImage]);
 
   return (

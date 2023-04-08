@@ -70,12 +70,14 @@ export default function Booking() {
           className="grid md:grid-cols-5 md:gap-5"
           renderItem={({ item, key }: { item: any; key: string | number }) => {
             return (
-              <CardBooking
-                image={item.user.image}
-                name={item.user.name}
-                position={item.user.position}
-                className="bg-white card-bottom rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
-              />
+              <>
+                <CardBooking
+                  image={item.user.image}
+                  name={item.user.name}
+                  position={item.user.position}
+                  className="bg-white card-bottom rounded-lg text-start py-5 px-7 cursor-pointer transition-all delay-75 hover:shadow-lg"
+                />
+              </>
             );
           }}
         />
