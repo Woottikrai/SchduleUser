@@ -1,21 +1,14 @@
 import axios from "axios";
-import ICreateder from "../../models/ICreateder";
-import IDate from "../../models/IDate";
-import { IUser } from "../../models/IUser";
 
-const BASE_URL = "http://localhost:8080/schedule/";
+const BASE_URL = "http://localhost:8080/user/";
 
 export async function Get() {
-  return await axios.get<Array<any>>(`${BASE_URL}get`);
+  return await axios.get<Array<IUser>>(`${BASE_URL}get`);
 }
 
-export async function Random() {
-  return await axios.get<Array<IUser>>(`${BASE_URL}random`);
-}
-
-export async function Post(params?: any) {
+export async function Post(params?: IUser) {
   if (params) {
-    return await axios.post<IUser>(`${BASE_URL}post`, params);
+    return await axios.post<IUser>(`${BASE_URL}create`, params);
   }
 }
 

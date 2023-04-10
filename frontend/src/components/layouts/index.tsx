@@ -1,7 +1,6 @@
 import { Content } from "antd/es/layout/layout";
 import React from "react";
-import HideOnScroll from "../../utils/hideOnScroll";
-import Navbar from "./header";
+import SideBar from "./sidebar";
 type LayoutProps = {
   children: React.ReactNode;
 };
@@ -9,8 +8,7 @@ type LayoutProps = {
 export default function Layout({ children }: LayoutProps) {
   return (
     <div>
-      <Navbar />
-      <Content>{children}</Content>
+      <SideBar>{children}</SideBar>
     </div>
   );
 }

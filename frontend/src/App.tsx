@@ -7,19 +7,19 @@ import Home from "./pages/home";
 import UserList from "./pages/userList";
 import Booking from "./pages/booking";
 import ErrorPage from "./pages/errorPage";
-import Date from "./pages/signin";
-
 import CreateUser from "./pages/createUser";
 import EditUser from "./pages/editUser";
+import SettingDate from "./pages/settingDate_Notiline_NotiEmail";
 
 function App() {
   const routes: Array<IRoute> = [
-    { path: "/", element: <Home /> },
+    { path: "/home", element: <Home /> },
     { path: "/Signin", element: <Signin /> },
-    { path: "/UserList", element: <UserList /> },
+    { path: "/User", element: <UserList /> },
     { path: "/CreateUser", element: <CreateUser /> },
-    { path: "/userList/:id/EditUser", element: <EditUser /> },
+    { path: "/user/:id/EditUser", element: <EditUser /> },
     { path: "/Booking", element: <Booking /> },
+    { path: "/SettingDate", element: <SettingDate /> },
     { path: "/*", element: <ErrorPage /> },
   ];
   return (

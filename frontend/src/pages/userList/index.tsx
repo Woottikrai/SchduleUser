@@ -13,6 +13,7 @@ import { PlusOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 import CardUserList from "../../components/card/cardUserList";
 import TableComponent from "../../components/tablecomponent";
 import { wait } from "../../utils/wait";
+import { keys } from "@mui/system";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser>);
@@ -28,8 +29,6 @@ export default function UserList() {
     setOpen(true);
   };
   const handleOk = async (idx?: any) => {
-    console.log(idx);
-
     try {
       setModalText("The modal will be closed after two seconds");
       setConfirmLoading(true);
@@ -99,13 +98,14 @@ export default function UserList() {
   React.useEffect(() => {
     (async () => {
       const { data } = await ApiUser.Get();
+      data.sort((a: any, b: any) => (a.id > b.id ? 1 : -1)); //sort id
       setUsers(data);
     })();
   }, []);
   return (
     <div className="max-w-5xl mx-auto mt-10">
       <div className="flex justify-between">
-        <span className="text-3xl tracking-wide font-semibold uppercase text-gray-900">
+        <span className="text-3xl tracking-wide font-bold fontImport uppercase text-gray-900">
           Users
         </span>
         <div>

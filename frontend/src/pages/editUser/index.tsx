@@ -86,7 +86,7 @@ export default function EditUser() {
       setError("Something went wrong");
     } finally {
       setTimeout(() => {
-        navigate("/userList");
+        navigate("/user");
       }, 3000);
     }
   };

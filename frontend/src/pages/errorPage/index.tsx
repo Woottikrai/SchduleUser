@@ -21,7 +21,7 @@ export default function ErrorPage() {
         className="my-3"
         type="primary"
         size="large"
-        onClick={() => navigate("/")}
+        onClick={() => navigate("/home")}
       >
         go to homepage
       </Button>

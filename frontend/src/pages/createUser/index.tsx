@@ -59,7 +59,7 @@ export default function CreateUser() {
       setError("Something went wrong");
     } finally {
       setTimeout(() => {
-        navigate("/userList");
+        navigate("/user");
       }, 3000);
     }
   };

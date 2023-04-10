@@ -21,15 +21,29 @@ export default function Booking() {
   // console.log(moment().isoWeekday());
 
   const handleDate = async (idx: string | number) => {
-    const value = `2023-04-0${idx}`;
+    console.log(idx);
+
     console.log("send");
 
     // console.log(value);
     try {
       const { data } = await ApiScheduleApi.Get();
-      setUsers(data);
+      const newData = [];
 
-      // setUsers(data);
+      for (const res of data) {
+        const dayFormat = dayjs(res.calendar.date).format("YYYY-MM-DD");
+        const last2index = dayFormat.slice(
+          dayFormat.length - 2,
+          dayFormat.length
+        ); //get last 2 index
+        if (Number(last2index) === idx) {
+          newData.push(res);
+        }
+      }
+
+      setUsers(newData);
+
+      console.log(data);
     } catch (err) {
       alert(err);
     }
@@ -42,8 +56,6 @@ export default function Booking() {
       alert(err);
     }
   };
-
-  console.log(initialUsers);
 
   return (
     <div className="max-w-4xl mx-auto mt-10">
@@ -67,7 +79,7 @@ export default function Booking() {
       <div className=" bg-gray-50 border border-gray-300 text-gray-900 h-96 text-sm w-full mx-auto p-2.5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <GridLayout
           items={initialUsers}
-          className="grid md:grid-cols-5 md:gap-5"
+          className="grid md:grid-cols-5 md:gap-5 overflow-auto  py-5 px-2.5"
           renderItem={({ item, key }: { item: any; key: string | number }) => {
             return (
               <>

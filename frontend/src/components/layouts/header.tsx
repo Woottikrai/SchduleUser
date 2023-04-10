@@ -14,21 +14,25 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import HideOnScroll from "../../utils/hideOnScroll";
-import { GithubFilled } from "@ant-design/icons";
+import { GithubFilled, SettingOutlined } from "@ant-design/icons";
 import { AntdIconProps } from "@ant-design/icons/lib/components/AntdIcon";
 import { jsx } from "@emotion/react";
 import { CSSProperties } from "@emotion/serialize";
 import { useNavigate } from "react-router-dom";
+import { SettingFilled } from "@ant-design/icons";
 interface Props {
   window?: () => Window;
 }
-
-const useStyle: CSSProperties | any = {
+const useStyle: React.CSSProperties | any = {
   fontSize: "1.5rem",
 };
-
 const drawerWidth = 240;
-const navItems = ["Home", "User", "Booking", <GithubFilled style={useStyle} />];
+const navItems = [
+  "Home",
+  "User",
+  "Booking",
+  <SettingFilled style={useStyle} />,
+];
 
 export default function DrawerAppBar(props: Props) {
   const { window } = props;
@@ -53,6 +57,10 @@ export default function DrawerAppBar(props: Props) {
         break;
 
       case 3:
+        navigate("/settingDate");
+        break;
+
+      case 4:
         navigate("https://github.com/Woottikrai/SchduleUser");
         break;
 
