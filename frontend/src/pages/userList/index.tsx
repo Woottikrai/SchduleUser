@@ -17,6 +17,7 @@ import { keys } from "@mui/system";
 
 export default function UserList() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser>);
+  const [colors, setColors] = React.useState<string[]>([]);
   const [searchText, setSearchText] = React.useState("");
   const navigate = useNavigate();
   const [open, setOpen] = React.useState(false);
@@ -223,6 +224,7 @@ export default function UserList() {
               ];
               const randomColorTag1: string =
                 Colors[Math.floor(Math.random() * Colors.length)];
+
               const randomColorTag2: string =
                 Colors[Math.floor(Math.random() * Colors.length)];
 

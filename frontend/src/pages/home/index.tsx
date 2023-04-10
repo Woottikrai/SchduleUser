@@ -47,7 +47,7 @@ export default function Home() {
             key: string | number;
           }) => {
             return (
-              <Link key={key} to={item.path}>
+              <Link key={key} to={item.path} className="no-underline">
                 <Card
                   title={item.name}
                   description={item.description}
@@ -73,7 +73,7 @@ export default function Home() {
             key: string | number;
           }) => {
             return (
-              <Link key={key} to={item.path}>
+              <Link key={key} to={item.path} className="no-underline">
                 <Card
                   title={item.name}
                   description={item.description}
