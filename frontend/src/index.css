@@ -15,7 +15,8 @@ h3,
 h4, 
 h6, 
 p, 
-div {
+div,
+span {
   font-family: 'Quicksand', sans-serif;
 }
 

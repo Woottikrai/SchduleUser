@@ -20,7 +20,7 @@ export default function EditUser() {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setInputUser((prevItem: any) => {
+    setInputUser((prevItem: IUser) => {
       return { ...prevItem, [e.target.name]: e.target.value };
     });
   };

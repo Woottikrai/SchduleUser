@@ -23,7 +23,7 @@ export default function UserList() {
   const [open, setOpen] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [modalText, setModalText] = React.useState("Are you sure to delete?");
-  const [selected, setSelected] = useState<IUser>();
+  const [selected, setSelected] = useState({} as Partial<IUser>);
   const BASE_URL = "http://localhost:8080/user/";
 
   const showModal = () => {
@@ -48,15 +48,10 @@ export default function UserList() {
     }
   };
 
-  // const handleTest = (idx: any) => {
-  //   console.log(idx);
-  // };
-
   const handleCancel = () => {
-    // console.log("Clicked cancel button");
     setOpen(false);
   };
-  const handleEditUser = (idx?: string) => {
+  const handleEditUser = (idx?: string | number) => {
     navigate(`${idx}/EditUser`);
   };
 
@@ -89,10 +84,10 @@ export default function UserList() {
     };
   });
 
-  const frontendDeverloper = dataTable.filter((fd) => {
+  const frontendDeverloper = dataTable.filter((fd: Pick<IUser, "position">) => {
     return fd.position === "frontend developer";
   });
-  const backendDeverloper = dataTable.filter((bd) => {
+  const backendDeverloper = dataTable.filter((bd: Pick<IUser, "position">) => {
     return bd.position === "backend developer";
   });
 
@@ -170,23 +165,23 @@ export default function UserList() {
                 .includes(value.toLowerCase());
             },
 
-            render: (_, rc: any) => {
+            render: (_, rc: Partial<IUserTable>) => {
               return (
                 <div className="ms-10">
                   <Row className="flex align-middle justify-start relative left-10">
                     <Col className="">
                       <Avatar
-                        src={rc.columnName.image}
+                        src={rc.columnName?.image}
                         className=""
                         size={50}
                       />
                     </Col>
                     <Col className="ms-3 text-start">
                       <p className="text-black tracking-wider capitalize text-md font-bold">
-                        {rc.columnName.name}
+                        {rc.columnName?.name}
                       </p>
                       <p className="text-gray-600 tracking-wide lowercase text-sm font-thin">
-                        {rc.columnName.email}
+                        {rc.columnName?.email}
                       </p>
                     </Col>
                   </Row>
@@ -207,7 +202,7 @@ export default function UserList() {
             dataIndex: "social",
             key: "social",
             align: "center",
-            render: (_, rc: any) => {
+            render: (_, rc: Partial<IUserTable>) => {
               //
               const Colors: Array<string> = [
                 "geekblue",
@@ -245,7 +240,7 @@ export default function UserList() {
             dataIndex: "action",
             key: "action",
             align: "center",
-            render: (_, rc: any) => {
+            render: (_, rc: Partial<IUserTable>) => {
               return (
                 <div className="flex justify-center align-middle">
                   <span onClick={() => handleEditUser(rc.id)}>
