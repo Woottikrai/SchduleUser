@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { columns } from "../../data/columns";
 import { Row, Col, Avatar, Tag } from "antd";
 
-import * as ApiUser from "../../service/API/UserApi";
+import * as Api from "../../service/API/Api";
 import { IUser, IUserTable } from "../../models/IUser";
 import { PlusOutlined, CloudDownloadOutlined } from "@ant-design/icons";
 
@@ -23,8 +23,8 @@ export default function UserList() {
   const [open, setOpen] = React.useState(false);
   const [confirmLoading, setConfirmLoading] = React.useState(false);
   const [modalText, setModalText] = React.useState("Are you sure to delete?");
-
   const [selected, setSelected] = useState<IUser>();
+  const BASE_URL = "http://localhost:8080/user/";
 
   const showModal = () => {
     setOpen(true);
@@ -37,12 +37,12 @@ export default function UserList() {
         setOpen(false);
         setConfirmLoading(false);
       }, 2000);
-      await ApiUser.Delete(Number(idx));
+      await Api.Delete<IUser>(Number(idx));
     } catch (err) {
       alert(err);
     } finally {
       setTimeout(async () => {
-        const { data } = await ApiUser.Get();
+        const { data } = await Api.Get<IUser>(BASE_URL);
         setUsers(data);
       }, 2000);
     }
@@ -98,7 +98,7 @@ export default function UserList() {
 
   React.useEffect(() => {
     (async () => {
-      const { data } = await ApiUser.Get();
+      const { data } = await Api.Get<IUser>(BASE_URL);
       data.sort((a: any, b: any) => (a.id > b.id ? 1 : -1)); //sort id
       setUsers(data);
     })();

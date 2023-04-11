@@ -1,6 +1,6 @@
 import React from "react";
 
-import * as ApiUser from "../../service/API/UserApi";
+import * as Api from "../../service/API/Api";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../models/IUser";
 import { delay, wait } from "../../utils/wait";
@@ -12,6 +12,7 @@ export default function CreateUser() {
   const [preview, setPreview] = React.useState<string | any>();
   const [inputImage, setInputImage] = React.useState<File>();
   const [error, setError] = React.useState("");
+  const BASE_URL = "http://localhost:8080/user/";
   const navigate = useNavigate();
 
   const handleChange = (
@@ -46,7 +47,7 @@ export default function CreateUser() {
       inputUser.name = `${inputUser.firstname} ${inputUser.lastname}`;
       console.log(inputUser);
 
-      const data = await ApiUser.Post(inputUser);
+      const data = await Api.Post<IUser>(inputUser, BASE_URL);
       console.log(data);
 
       // console.log(data);

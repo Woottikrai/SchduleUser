@@ -5,12 +5,11 @@ import Box from "../../components/box";
 import GridLayout from "../../components/layouts/gridLayout";
 import { Button } from "antd";
 import { IUser } from "../../models/IUser";
-import * as ApiUser from "../../service/API/UserApi";
-import * as ApiScheduleApi from "../../service/API/ScheduleApi";
+import * as Api from "../../service/API/Api";
+
 import CardBooking from "../../components/card/cardBooking";
 export default function Booking() {
   const [initialUsers, setUsers] = React.useState([] as Array<IUser> | any);
-
   const [arrDate, setArrDate] = React.useState([
     { date: "Mon", numDate: moment().day("Monday").date() },
     { date: "Tues", numDate: moment().day("Tuesday").date() },
@@ -18,7 +17,7 @@ export default function Booking() {
     { date: "Thur", numDate: moment().day("Thursday").date() },
     { date: "Fri", numDate: moment().day("Friday").date() },
   ]);
-  // console.log(moment().isoWeekday());
+  const BASE_URL = "http://localhost:8080/schedule/";
 
   const handleDate = async (idx: string | number) => {
     console.log(idx);
@@ -27,7 +26,7 @@ export default function Booking() {
 
     // console.log(value);
     try {
-      const { data } = await ApiScheduleApi.Get();
+      const { data } = await Api.Get<any>(BASE_URL);
       const newData = [];
 
       for (const res of data) {
@@ -51,7 +50,7 @@ export default function Booking() {
 
   const handleGenerateRandom = async () => {
     try {
-      await ApiScheduleApi.Random();
+      await Api.Random<IUser>(BASE_URL);
     } catch (err) {
       alert(err);
     }
@@ -79,7 +78,7 @@ export default function Booking() {
       <div className=" bg-gray-50 border border-gray-300 text-gray-900 h-96 text-sm w-full mx-auto p-2.5 rounded-lg focus:ring-blue-500 focus:border-blue-500 block dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         <GridLayout
           items={initialUsers}
-          className="grid md:grid-cols-5 md:gap-5 overflow-auto  py-5 px-2.5"
+          className="grid md:grid-cols-5 md:gap-5 overflow-auto py-5 px-2.5 h-96"
           renderItem={({ item, key }: { item: any; key: string | number }) => {
             return (
               <>

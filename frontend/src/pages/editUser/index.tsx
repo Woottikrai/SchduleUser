@@ -1,5 +1,5 @@
 import React from "react";
-import * as ApiUser from "../../service/API/UserApi";
+import * as Api from "../../service/API/Api";
 import { useNavigate } from "react-router-dom";
 import { IUser } from "../../models/IUser";
 import { delay, wait } from "../../utils/wait";
@@ -14,6 +14,7 @@ export default function EditUser() {
   const [inputImage, setInputImage] = React.useState<File>();
   const [error, setError] = React.useState("");
   const { id } = useParams();
+  const BASE_URL = "http://localhost:8080/user/";
   const navigate = useNavigate();
 
   const handleChange = (
@@ -39,7 +40,7 @@ export default function EditUser() {
   };
 
   const getValueUser = async (id?: string | number) => {
-    const data = await ApiUser.GetId(id);
+    const data = await Api.GetId<IUser>(id, BASE_URL);
 
     if (data) {
       setInputUser({
@@ -77,7 +78,7 @@ export default function EditUser() {
 
       console.log(resData);
 
-      const data = await ApiUser.Update(Number(id), resData);
+      const data = await Api.Update(Number(id), resData, BASE_URL);
 
       setError("");
     } catch (error) {

@@ -29,7 +29,7 @@ export class CalendarService {
         date = date.add(1, 'day')
       ) {
         daysOfWeek.push({
-          date: date.format('DD-MM-YYYY'),
+          date: date.format('YYYY-MM-DD'),
         });
       }
       // console.log(daysOfWeek);

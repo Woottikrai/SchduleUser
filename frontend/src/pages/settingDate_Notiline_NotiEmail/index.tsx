@@ -1,25 +1,32 @@
 import React from "react";
 import { TimePicker, Select, Empty } from "antd";
 import dayjs from "dayjs";
-import * as ApiNotiEmail from "../../service/API/NotiEmailApi";
-import * as ApiNotiLine from "../../service/API/NotiLineApi";
+import * as Api from "../../service/API/Api";
 import PacmanLoader from "react-spinners/PacmanLoader";
 import line from "../../assets/line_logo.png";
 import email from "../../assets/email_logo.png";
 import SettingForm from "../../components/form/settingForm";
+import INotiEmail from "../../models/INotiEmail";
+import INotiLine from "../../models/INotiLine";
 export default function SettingDate() {
   const format = "HH:mm";
-  const [valueNotiLine, setNotiLine] = React.useState<string>("");
-  const [valueNotiEmail, setNotiEmail] = React.useState<string>("");
+  const [valueNotiLine, setNotiLine] = React.useState<Omit<INotiLine, "id">>({
+    date: "",
+  });
+  const [valueNotiEmail, setNotiEmail] = React.useState<Omit<INotiEmail, "id">>(
+    { date: "" }
+  );
+  const BASE_URL_NOTILINE = "http://localhost:8080//";
+  const BASE_URL_NOTIEMAIL = "http://localhost:8080//";
 
   const onChangeNotiEmail = (time: unknown, timeString: string) => {
-    setNotiEmail(timeString);
-    ApiNotiEmail.Post(valueNotiEmail);
+    setNotiEmail({ date: timeString });
+    Api.Post<Omit<INotiEmail, "id">>(valueNotiEmail, BASE_URL_NOTIEMAIL);
   };
 
   const onChangeNotiLine = (time: unknown, timeString: string) => {
-    setNotiLine(timeString);
-    ApiNotiLine.Post(valueNotiLine);
+    setNotiLine({ date: timeString });
+    Api.Post<Omit<INotiLine, "id">>(valueNotiLine, BASE_URL_NOTILINE);
   };
 
   return (
